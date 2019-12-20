@@ -3,7 +3,7 @@
 # このリポジトリは何？
 
 掲示板のソースです。<br />
-vue rails mariadbバージョン <br />
+react rails mariadbバージョン <br />
 シングルページアプリケーション(SPA)です。
 
 # 開発環境
@@ -36,7 +36,7 @@ SERVER_IP   →　サーバのIP
 NGINX_PORT  →  フロントエンドサーバのポート番号 (お好きな番号を選んでください)
 BACKEND_PORT →  バックエンドサーバのポート番号 (お好きな番号を選んでください)
 
-# react・バックエンドnodejsをビルド
+# reactをビルド
 sudo docker-compose -f docker-compose.build.yml up
 sudo docker-compose -f docker-compose.build.yml down -v
 
