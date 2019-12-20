@@ -1,0 +1,45 @@
+version: '3'
+services:
+
+  # フロントエンドサーバ
+  nginx:
+    build: ./nginx
+    container_name: nginx
+    ports:
+      - "${NGINX_PORT}:8080"
+    volumes:
+      - ./nodejs/file/front/dist:/usr/share/nginx/html
+    environment:
+      - TZ=Asia/Tokyo
+    tty: true
+    restart: always
+  
+  # RDB
+  mariadb:
+    build: ./mariadb
+    container_name: mariadb
+    environment:
+      TZ: Asia/Tokyo
+    env_file: ./mariadb/.env
+    volumes:
+      - ./mariadb/data:/var/lib/mysql
+      - ./mariadb/mysql-confd:/etc/mysql/conf.d
+      - ./mariadb/init-sql:/docker-entrypoint-initdb.d
+    tty: true
+    restart: always
+
+  # バックエンドサーバ
+  ruby:
+    build: ./ruby
+    container_name: ruby
+    ports:
+      - "${BACKEND_PORT}:3000"
+    depends_on:
+      - mariadb
+    env_file:
+      - .env
+    volumes:
+      - ./ruby/app:/app
+    command: [sh, -c, bundle install && rails s -e production -b '0.0.0.0']
+    tty: true
+    restart: always

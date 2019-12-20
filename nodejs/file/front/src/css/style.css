@@ -1,0 +1,41 @@
+header {
+  background: #ff8d99;
+}
+
+img:hover {
+  opacity: 0.7;
+}
+
+a {
+  font-weight: bold;
+}
+
+section {
+  background: rgb(250, 243, 234);
+}
+
+@media screen and (max-width: 767px) {
+  article {
+    width: 300px;
+  }
+  #search_input {
+    width: 80%;
+  }
+}
+@media screen and (min-width: 768px) {
+  article {
+    width: 600px;
+  }
+}
+
+#index_card_header {
+  height: 40px;
+  font-size: 13px;
+  padding: 0 1.25rem;
+}
+
+#board_card_header {
+  max-height: 40px;
+  font-size: 11px;
+  padding: 0 1.25rem;
+}

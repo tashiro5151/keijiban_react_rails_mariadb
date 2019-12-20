@@ -1,0 +1,61 @@
+0:
+  select
+           t1.*
+          ,count(t2.id) count
+    from (
+          select
+                  s1.*
+            from rooms s1
+            order by s1.updated_at DESC
+            limit :limit
+            offset :offset
+          ) t1
+
+          left outer join
+
+          talks t2
+          on t1.id = t2.room_id
+    group by t1.id
+    order by t1.updated_at DESC
+
+1: 
+  select
+          t1.*
+          ,count(t2.id) count
+    from (
+          select
+                  *
+            from rooms s1
+            where s1.genreId = :genreId
+            order by s1.updated_at DESC
+            limit :limit 
+           offset :offset
+          ) t1
+
+          left outer join
+
+          talks t2
+          on t1.id = t2.room_id
+    group by t1.id
+    order by t1.updated_at DESC
+
+2:
+  select
+          t1.*
+          ,count(t2.id) count
+    from (
+          select
+                  s1.*
+            from rooms s1
+           where name like :name
+           order by s1.updated_at DESC
+           limit :limit
+          offset :offset
+          ) t1
+
+          left outer join
+
+          talks t2
+          on t1.id = t2.room_id
+    group by t1.id
+    order by t1.updated_at DESC
